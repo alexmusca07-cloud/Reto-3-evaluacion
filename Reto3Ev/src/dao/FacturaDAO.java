@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class FacturaDAO implements GenericDAO<Factura> {
 	@Override
 	public Factura obtenerPorId(int id) {
 		String sql = """
-				select id,id_cliente,id_empleado,subtotal,iva,total from factura where id = ?
+				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura where id = ?
 				""";
 		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
 			ps.setInt(1, id);
@@ -57,7 +58,7 @@ public class FacturaDAO implements GenericDAO<Factura> {
 	public List<Factura> obtenerPorIdCliente(int id){
 		List<Factura> lista = new ArrayList<Factura>();
 		String sql = """
-				select id,id_cliente,id_empleado,subtotal,iva,total from factura where id_cliente = ?
+				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura where id_cliente = ?
 				""";
 		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
 			ps.setInt(1, id);
@@ -76,7 +77,7 @@ public class FacturaDAO implements GenericDAO<Factura> {
 	public List<Factura> obtenerPorIdEmpleado(int id){
 		List<Factura> lista = new ArrayList<Factura>();
 		String sql = """
-				select id,id_cliente,id_empleado,subtotal,iva,total from factura where id_empleado = ?
+				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura where id_empleado = ?
 				""";
 		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
 			ps.setInt(1, id);
@@ -92,9 +93,29 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		return null;
 	}
 	
+	public List<Factura> obtenerPormes(int mes){
+		List<Factura> lista = new ArrayList<Factura>();
+		String sql = """
+				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura where month(
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setInt(1, mes);
+			try(ResultSet rs = ps.executeQuery()){
+				while(rs.next()) {
+					lista.add(mapeo(rs));
+				}
+			}
+			return lista;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
 	private Factura mapeo(ResultSet rs) throws SQLException{
 		Factura f = new Factura();
 		f.setId(rs.getInt("id"));
+		f.setFecha(rs.getObject("fecha",LocalDate.class));
 		f.setId_cliente(rs.getInt("id_cliente"));
 		f.setId_empleado(rs.getInt("id_empleado"));
 		f.setSubtotal(rs.getDouble("subtotal"));
