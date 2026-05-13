@@ -1,6 +1,5 @@
 package modelo;
 
-import java.math.BigDecimal;
 
 public class LineaFactura {
 
@@ -8,11 +7,11 @@ public class LineaFactura {
 	protected int id_factura;
 	protected int id_producto;
 	protected int cantidad;
-	protected BigDecimal precio_unitario;
-	protected BigDecimal importe;
+	protected Double precio_unitario;
+	protected Double importe;
 	
-	public LineaFactura(int id, int id_factura, int id_producto, int cantidad, BigDecimal precio_unitario,
-			BigDecimal importe) {
+	public LineaFactura(int id, int id_factura, int id_producto, int cantidad, Double precio_unitario,
+			Double importe) {
 		super();
 		this.id = id;
 		this.id_factura = id_factura;
@@ -22,13 +21,13 @@ public class LineaFactura {
 		this.importe = importe;
 	}
 	
-	public LineaFactura(int id_factura, int id_producto, int cantidad, BigDecimal precio_unitario,
-			BigDecimal importe) {
+	public LineaFactura(int id_factura, int id_producto, int cantidad, Double precio_unitario,
+			Double importe) {
 		this(0,id_factura,id_producto,cantidad,precio_unitario,importe);
 	}
 	
 	public LineaFactura() {
-		this(0,0,0,0,new BigDecimal(0),new BigDecimal(0));
+		this(0,0,0,0,0.0,0.0);
 	}
 
 	public int getId() {
@@ -63,19 +62,19 @@ public class LineaFactura {
 		this.cantidad = cantidad;
 	}
 
-	public BigDecimal getPrecio_unitario() {
+	public Double getPrecio_unitario() {
 		return precio_unitario;
 	}
 
-	public void setPrecio_unitario(BigDecimal precio_unitario) {
+	public void setPrecio_unitario(Double precio_unitario) {
 		this.precio_unitario = precio_unitario;
 	}
 
-	public BigDecimal getImporte() {
+	public Double getImporte() {
 		return importe;
 	}
 
-	public void setImporte(BigDecimal importe) {
+	public void setImporte(Double importe) {
 		this.importe = importe;
 	}
 
