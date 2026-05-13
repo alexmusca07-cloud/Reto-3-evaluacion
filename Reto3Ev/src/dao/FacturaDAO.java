@@ -27,7 +27,7 @@ public class FacturaDAO implements GenericDAO<Factura> {
 	@Override
 	public Factura obtenerPorId(int id) {
 		String sql = """
-				select * from factura where id = ?
+				select id,id_cliente,id_empleado,subtotal,iva,total from factura where id = ?
 				""";
 		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
 			ps.setInt(1, id);
@@ -57,7 +57,7 @@ public class FacturaDAO implements GenericDAO<Factura> {
 	public List<Factura> obtenerPorIdCliente(int id){
 		List<Factura> lista = new ArrayList<Factura>();
 		String sql = """
-				select * from factura where id_cliente = ?
+				select id,id_cliente,id_empleado,subtotal,iva,total from factura where id_cliente = ?
 				""";
 		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
 			ps.setInt(1, id);
@@ -76,7 +76,7 @@ public class FacturaDAO implements GenericDAO<Factura> {
 	public List<Factura> obtenerPorIdEmpleado(int id){
 		List<Factura> lista = new ArrayList<Factura>();
 		String sql = """
-				select * from factura where id_empleado = ?
+				select id,id_cliente,id_empleado,subtotal,iva,total from factura where id_empleado = ?
 				""";
 		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
 			ps.setInt(1, id);
