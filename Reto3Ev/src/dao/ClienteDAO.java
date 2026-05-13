@@ -10,7 +10,7 @@ public class ClienteDAO implements GenericDAO<Cliente>{
 
 	@Override
 	public boolean insertar(Cliente cliente) {
-		String sql = "INSERT INTO autor (nombre, direccion) VALUES (?, ?)";
+		String sql = "INSERT INTO cliente (nombre, direccion) VALUES (?, ?)";
 
 		try (Connection conn = ConexionBD.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
