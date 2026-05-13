@@ -1,16 +1,17 @@
 package modelo;
 
-public class Cliente {
+public class Cliente extends Persona {
 
 	protected int id;
 	protected String direccion;
-	public Cliente(int id, String direccion) {
-		super();
-		this.id = id;
+	public Cliente(int id, String dni, String nombre, int id2, String direccion) {
+		super(id, dni, nombre);
+		id = id2;
 		this.direccion = direccion;
 	}
-	public Cliente(String direccion) {
-		this(0, direccion);
+	public Cliente( String dni, String nombre, String direccion) {
+		super( dni, nombre);
+		this.direccion = direccion;
 	}
 	public Cliente() {
 		super();
@@ -31,5 +32,10 @@ public class Cliente {
 	public String toString() {
 		return "Cliente [id=" + id + ", direccion=" + direccion + "]";
 	}
+	
+	
+
+
+	
 	
 }

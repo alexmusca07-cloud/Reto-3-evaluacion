@@ -1,18 +1,20 @@
 package modelo;
 
-public class Empleado {
-	
+public class Empleado extends Persona {
+
 	protected int id;
 	protected String puesto;
 	protected double salario;
-	public Empleado(int id, String puesto, double salario) {
-		super();
-		this.id = id;
+	public Empleado(int id, String dni, String nombre, int id2, String puesto, double salario) {
+		super(id, dni, nombre);
+		id = id2;
 		this.puesto = puesto;
 		this.salario = salario;
 	}
-	public Empleado(String puesto, double salario) {
-		this(0, puesto, salario);
+	public Empleado(String dni, String nombre, String puesto, double salario) {
+		super(dni, nombre);
+		this.puesto = puesto;
+		this.salario = salario;
 	}
 	public Empleado() {
 		super();
@@ -39,6 +41,8 @@ public class Empleado {
 	public String toString() {
 		return "Empleado [id=" + id + ", puesto=" + puesto + ", salario=" + salario + "]";
 	}
+	
+	
 	
 	
 }
