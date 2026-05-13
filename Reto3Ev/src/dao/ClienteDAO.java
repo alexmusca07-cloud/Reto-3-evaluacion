@@ -17,7 +17,7 @@ public class ClienteDAO implements GenericDAO<Cliente>{
 	@Override
 	public List<Cliente> obtenerTodos() {
 		List<Cliente> clientes = new ArrayList<>();
-		String sql = "SELECT id, nombre, nacionalidad FROM autor ORDER BY nombre";
+		String sql = "SELECT id, direccion FROM cliente";
 
 		try (Connection conn = ConexionBD.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
