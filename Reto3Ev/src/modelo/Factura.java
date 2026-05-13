@@ -1,6 +1,5 @@
 package modelo;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Factura {
@@ -9,12 +8,12 @@ public class Factura {
 	protected LocalDate fecha;
 	protected int id_cliente;
 	protected int id_empleado;
-	protected BigDecimal subtotal;
+	protected Double subtotal;
 	protected double iva;
-	protected BigDecimal total;
+	protected Double total;
 
-	public Factura(int id, LocalDate fecha, int id_cliente, int id_empleado, BigDecimal subtotal, double iva,
-			BigDecimal total) {
+	public Factura(int id, LocalDate fecha, int id_cliente, int id_empleado, Double subtotal, double iva,
+			Double total) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
@@ -25,13 +24,13 @@ public class Factura {
 		this.total = total;
 	}
 
-	public Factura(LocalDate fecha, int id_cliente, int id_empleado, BigDecimal subtotal, double iva,
-			BigDecimal total) {
+	public Factura(LocalDate fecha, int id_cliente, int id_empleado, Double subtotal, double iva,
+			Double total) {
 		this(0,fecha,id_cliente,id_empleado,subtotal,iva,total);
 	}
 
 	public Factura() {
-		this(0,LocalDate.now(),0,0,new BigDecimal(0),0,new BigDecimal(0));
+		this(0,LocalDate.now(),0,0,0.0,0,0.0);
 	}
 
 	public int getId() {
@@ -66,11 +65,11 @@ public class Factura {
 		this.id_empleado = id_empleado;
 	}
 
-	public BigDecimal getSubtotal() {
+	public Double getSubtotal() {
 		return subtotal;
 	}
 
-	public void setSubtotal(BigDecimal subtotal) {
+	public void setSubtotal(Double subtotal) {
 		this.subtotal = subtotal;
 	}
 
@@ -82,11 +81,11 @@ public class Factura {
 		this.iva = iva;
 	}
 
-	public BigDecimal getTotal() {
+	public Double getTotal() {
 		return total;
 	}
 
-	public void setTotal(BigDecimal total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 

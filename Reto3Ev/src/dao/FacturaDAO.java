@@ -1,8 +1,14 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Factura;
+import util.ConexionBD;
 
 public class FacturaDAO implements GenericDAO<Factura> {
 
@@ -36,4 +42,53 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		return false;
 	}
 
+	public List<Factura> obtenerPorIdCliente(int id){
+		List<Factura> lista = new ArrayList<Factura>();
+		String sql = """
+				select * from factura where id_cliente = ?
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setInt(1, id);
+			try(ResultSet rs = ps.executeQuery()){
+				while(rs.next()) {
+					lista.add(mapeo(rs));
+				}
+			}
+			return lista;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
+	public List<Factura> obtenerPorIdEmpleado(int id){
+		List<Factura> lista = new ArrayList<Factura>();
+		String sql = """
+				select * from factura where id_empleado = ?
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setInt(1, id);
+			try(ResultSet rs = ps.executeQuery()){
+				while(rs.next()) {
+					lista.add(mapeo(rs));
+				}
+			}
+			return lista;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
+	private Factura mapeo(ResultSet rs) throws SQLException{
+		Factura f = new Factura();
+		f.setId(rs.getInt("id"));
+		f.setId_cliente(rs.getInt("id_cliente"));
+		f.setId_empleado(rs.getInt("id_empleado"));
+		f.setSubtotal(rs.getDouble("subtotal"));
+		f.setIva(rs.getDouble("iva"));
+		f.setTotal(rs.getDouble("total"));
+		return f;
+
+	}
 }
