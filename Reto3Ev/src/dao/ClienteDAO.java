@@ -9,9 +9,31 @@ import util.ConexionBD;
 public class ClienteDAO implements GenericDAO<Cliente>{
 
 	@Override
-	public boolean insertar(Cliente objeto) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean insertar(Cliente cliente) {
+		String sql = "INSERT INTO autor (nombre, direccion) VALUES (?, ?)";
+
+		try (Connection conn = ConexionBD.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+			pstmt.setString(1, cliente.getNombre());
+			pstmt.setString(3, cliente.getDireccion());
+
+			int filas = pstmt.executeUpdate();
+
+			if (filas > 0) {
+				try (ResultSet rs = pstmt.getGeneratedKeys()) {
+					if (rs.next()) {
+						cliente.setId(rs.getInt(1)); // asigna el ID
+						return true;
+					}
+				}
+			}
+			return false;
+
+		} catch (SQLException e) {
+			System.err.println("Error SQL al insertar '" + cliente.getNombre() + "': " + e.getMessage());
+			return false;
+		}
 	}
 
 	@Override
