@@ -6,7 +6,7 @@ import java.util.List;
 import modelo.Empleado;
 import util.ConexionBD;
 
-public class EmpleadoDAO implements GenericDAO<Empleado>{
+public class EmpleadoDAO implements GenericDAO<Empleado> {
 
 	@Override
 	public boolean insertar(Empleado objeto) {
@@ -65,7 +65,8 @@ public class EmpleadoDAO implements GenericDAO<Empleado>{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	private Empleado mapearFila(ResultSet rs) throws SQLException{
+
+	private Empleado mapearFila(ResultSet rs) throws SQLException {
 		Empleado e = new Empleado();
 		e.setId(rs.getInt("id"));
 		e.setPuesto(rs.getString("puesto"));

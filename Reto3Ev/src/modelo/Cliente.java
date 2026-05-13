@@ -4,38 +4,41 @@ public class Cliente extends Persona {
 
 	protected int id;
 	protected String direccion;
+
 	public Cliente(int id, String dni, String nombre, int id2, String direccion) {
 		super(id, dni, nombre);
 		id = id2;
 		this.direccion = direccion;
 	}
-	public Cliente( String dni, String nombre, String direccion) {
-		super( dni, nombre);
+
+	public Cliente(String dni, String nombre, String direccion) {
+		super(dni, nombre);
 		this.direccion = direccion;
 	}
+
 	public Cliente() {
 		super();
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getDireccion() {
 		return direccion;
 	}
+
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", direccion=" + direccion + "]";
 	}
-	
-	
 
-
-	
-	
 }

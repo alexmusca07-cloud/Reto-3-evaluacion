@@ -6,7 +6,7 @@ import java.util.List;
 import modelo.Cliente;
 import util.ConexionBD;
 
-public class ClienteDAO implements GenericDAO<Cliente>{
+public class ClienteDAO implements GenericDAO<Cliente> {
 
 	@Override
 	public boolean insertar(Cliente cliente) {
@@ -39,7 +39,7 @@ public class ClienteDAO implements GenericDAO<Cliente>{
 	@Override
 	public List<Cliente> obtenerTodos() {
 		List<Cliente> clientes = new ArrayList<>();
-		String sql = "SELECT id, direccion FROM cliente";
+		String sql = "SELECT p.id, p.dni, p.nombre, c.id as idcliente, c.direccion  FROM persona p join cliente c on p.id SELECT p.id, p.dni, p.nombre, c.id as idcliente, c.direccion  FROM persona p join cliente c on p.id=c.id";
 
 		try (Connection conn = ConexionBD.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -55,6 +55,7 @@ public class ClienteDAO implements GenericDAO<Cliente>{
 		}
 		return clientes;
 	}
+
 	@Override
 	public Cliente obtenerPorId(int id) {
 		String sql = "SELECT id, direccion FROM cliente WHERE id = ?";
@@ -86,7 +87,8 @@ public class ClienteDAO implements GenericDAO<Cliente>{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	private Cliente mapearFila(ResultSet rs) throws SQLException{
+
+	private Cliente mapearFila(ResultSet rs) throws SQLException {
 		Cliente c = new Cliente();
 		c.setId(rs.getInt("id"));
 		c.setDireccion(rs.getString("direccion"));
