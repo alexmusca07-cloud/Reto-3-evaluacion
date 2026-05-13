@@ -26,7 +26,19 @@ public class FacturaDAO implements GenericDAO<Factura> {
 
 	@Override
 	public Factura obtenerPorId(int id) {
-		// TODO Auto-generated method stub
+		String sql = """
+				select * from factura where id = ?
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setInt(1, id);
+			try(ResultSet rs = ps.executeQuery()){
+				if (rs.next()) {
+					return mapeo(rs);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return null;
 	}
 
