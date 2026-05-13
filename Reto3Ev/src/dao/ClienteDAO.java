@@ -3,9 +3,7 @@ package dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import modelo.Cliente;
-import modelo.Factura;
 import util.ConexionBD;
 
 public class ClienteDAO implements GenericDAO<Cliente>{
@@ -37,8 +35,22 @@ public class ClienteDAO implements GenericDAO<Cliente>{
 	}
 	@Override
 	public Cliente obtenerPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT id, direccion FROM cliente WHERE id = ?";
+
+		try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+			pstmt.setInt(1, id);
+
+			try (ResultSet rs = pstmt.executeQuery()) {
+				if (rs.next()) {
+					return mapearFila(rs);
+				}
+			}
+
+		} catch (SQLException e) {
+			System.err.println("Error SQL al buscar ID " + id + ": " + e.getMessage());
+		}
+		return null; // no encontrado
 	}
 
 	@Override
