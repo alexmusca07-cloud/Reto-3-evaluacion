@@ -63,7 +63,8 @@ public class Main {
 					break;
 				
 				case 4:
-					
+					Metodos_del_main.eje4(sc, fdao);
+					break;
 				default:
 					System.out.println("No es ni fin ni un número de los indicados");
 				}
@@ -74,6 +75,7 @@ public class Main {
 
 
 	}
+
 
 
 
