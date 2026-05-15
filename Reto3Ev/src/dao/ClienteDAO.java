@@ -10,13 +10,13 @@ public class ClienteDAO implements GenericDAO<Cliente> {
 
 	@Override
 	public boolean insertar(Cliente cliente) {
-		String sql = "INSERT INTO cliente (nombre, direccion) VALUES (?, ?)";
+		String sql = "INSERT INTO persona (dni, nombre) VALUES (?, ?)";
 
 		try (Connection conn = ConexionBD.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-			pstmt.setString(1, cliente.getNombre());
-			pstmt.setString(3, cliente.getDireccion());
+			pstmt.setString(1, cliente.getDni());
+			pstmt.setString(2, cliente.getNombre());
 
 			int filas = pstmt.executeUpdate();
 
@@ -28,12 +28,35 @@ public class ClienteDAO implements GenericDAO<Cliente> {
 					}
 				}
 			}
+			String sql2 = "INSERT INTO cliente (direccion) VALUES (?)";
+
+			try (Connection conn2 = ConexionBD.getConnection();
+					PreparedStatement pstmt2 = conn2.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS)) {
+
+				pstmt2.setString(1, cliente.getDireccion());
+
+				 filas = pstmt2.executeUpdate();
+
+				if (filas > 0) {
+					try (ResultSet rs = pstmt2.getGeneratedKeys()) {
+						if (rs.next()) {
+							cliente.setId(rs.getInt(1)); // asigna el ID
+							return true;
+						}
+					}
+				}
+			
 			return false;
 
 		} catch (SQLException e) {
 			System.err.println("Error SQL al insertar '" + cliente.getNombre() + "': " + e.getMessage());
 			return false;
 		}
+		} catch (SQLException e) {
+			System.err.println("Error SQL al insertar '" + cliente.getNombre() + "': " + e.getMessage());
+			return false;
+		}
+		
 	}
 
 	@Override
