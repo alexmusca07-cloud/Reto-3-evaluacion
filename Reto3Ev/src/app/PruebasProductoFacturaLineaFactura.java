@@ -27,7 +27,7 @@ public class PruebasProductoFacturaLineaFactura {
 		
 
 		//1
-				/*for (Cliente c : cdao.obtenerTodos()) {
+				for (Cliente c : cdao.obtenerTodos()) {
 					System.out.println(c);
 				}
 				System.out.println();
@@ -44,9 +44,8 @@ public class PruebasProductoFacturaLineaFactura {
 				System.out.println(edao.obtenerPorId(1));
 				for (Factura f : fdao.obtenerPorIdEmpleado(edao.obtenerPorId(1).getId())) {
 					System.out.println(f);
-				}*/
-				ClienteFichero.guardarFichero(cdao.obtenerTodos());
-				ClienteFichero.leerFichero();
+				}
+				
 	}
 
 }
