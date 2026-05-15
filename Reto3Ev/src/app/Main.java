@@ -50,50 +50,11 @@ public class Main {
 				switch (num) {
 				
 				case 1: 
-					int contadorCliente = 0;
-					for (Cliente c : cdao.obtenerTodos()) {
-						System.out.println(c);
-					}
-					System.out.println();
-					System.out.println("Escribe un id del cliente de los mostrados");
-					int id_cliente = Integer.parseInt(sc.nextLine());
-					for (Cliente c : cdao.obtenerTodos()) {
-						if(c.getId() == id_cliente) {
-							contadorCliente++;
-						}
-					}
-					if(contadorCliente > 0) {
-						for (Factura f : fdao.obtenerPorIdCliente(id_cliente)) {
-							System.out.println(f);
-						}
-						System.out.println();
-					} else {
-						System.out.println("no has insertado un id de los clientes mostrados antes");
-					}
+					Metodos_del_main.eje1(sc, fdao, cdao);
 					break;
 				
 				case 2:
-					int contadorEmpleado = 0;
-					for (Empleado e : edao.obtenerTodos()) {
-						System.out.println(e);
-					}
-					System.out.println();
-					System.out.println("Escribe un id del empleado de los mostrados");
-					System.out.println();
-					int id_empleado = Integer.parseInt(sc.nextLine());
-					for (Cliente c : cdao.obtenerTodos()) {
-						if(c.getId() == id_empleado) {
-							contadorEmpleado++;
-						}
-					}
-					if(contadorEmpleado > 0) {
-						for (Factura f : fdao.obtenerPorIdEmpleado(id_empleado)) {
-							System.out.println(f);
-						}
-						System.out.println();
-					} else {
-						System.out.println("no has insertado un id de los empleados mostrados antes");
-					}
+					Metodos_del_main.eje2(sc, fdao, cdao, edao);
 					break;
 				default:
 					System.out.println("No es ni fin ni un número de los indicados");
@@ -102,5 +63,9 @@ public class Main {
 		} while (salida != false);
 		
 	}
+
+
+
+
 }
 
