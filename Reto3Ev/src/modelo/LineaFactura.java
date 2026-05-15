@@ -1,6 +1,5 @@
 package modelo;
 
-
 public class LineaFactura {
 
 	protected int id;
@@ -9,9 +8,8 @@ public class LineaFactura {
 	protected int cantidad;
 	protected Double precio_unitario;
 	protected Double importe;
-	
-	public LineaFactura(int id, int id_factura, int id_producto, int cantidad, Double precio_unitario,
-			Double importe) {
+
+	public LineaFactura(int id, int id_factura, int id_producto, int cantidad, Double precio_unitario, Double importe) {
 		super();
 		this.id = id;
 		this.id_factura = id_factura;
@@ -20,14 +18,13 @@ public class LineaFactura {
 		this.precio_unitario = precio_unitario;
 		this.importe = importe;
 	}
-	
-	public LineaFactura(int id_factura, int id_producto, int cantidad, Double precio_unitario,
-			Double importe) {
-		this(0,id_factura,id_producto,cantidad,precio_unitario,importe);
+
+	public LineaFactura(int id_factura, int id_producto, int cantidad, Double precio_unitario, Double importe) {
+		this(0, id_factura, id_producto, cantidad, precio_unitario, importe);
 	}
-	
+
 	public LineaFactura() {
-		this(0,0,0,0,0.0,0.0);
+		this(0, 0, 0, 0, 0.0, 0.0);
 	}
 
 	public int getId() {
@@ -83,6 +80,5 @@ public class LineaFactura {
 		return "LineaFactura [id=" + id + ", id_factura=" + id_factura + ", id_producto=" + id_producto + ", cantidad="
 				+ cantidad + ", precio_unitario=" + precio_unitario + ", importe=" + importe + "]";
 	}
-	
-	
+
 }

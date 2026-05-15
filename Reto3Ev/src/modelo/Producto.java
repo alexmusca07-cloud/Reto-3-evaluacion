@@ -6,7 +6,7 @@ public class Producto {
 	protected String nombre;
 	protected Double precio;
 	protected int stock;
-	
+
 	public Producto(int id, String nombre, Double precio, int stock) {
 		super();
 		this.id = id;
@@ -14,13 +14,13 @@ public class Producto {
 		this.precio = precio;
 		this.stock = stock;
 	}
-	
+
 	public Producto(String nombre, Double precio, int stock) {
-		this(0,nombre,precio,stock);
+		this(0, nombre, precio, stock);
 	}
-	
+
 	public Producto() {
-		this(0,"producto",0.0,0);
+		this(0, "producto", 0.0, 0);
 	}
 
 	public int getId() {
@@ -59,6 +59,5 @@ public class Producto {
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", precio=" + precio + ", stock=" + stock + "]";
 	}
-	
-	
+
 }

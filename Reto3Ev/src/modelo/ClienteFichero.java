@@ -16,17 +16,16 @@ public class ClienteFichero {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-			}
+	}
+
 	public void leerFichero() {
 		// Leer cliente
-			try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("clientes.dat"))) {
-				Cliente clienteLeida = (Cliente) in.readObject();
-				System.out.println(clienteLeida);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("clientes.dat"))) {
+			Cliente clienteLeida = (Cliente) in.readObject();
+			System.out.println(clienteLeida);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-			
-		
 
 }

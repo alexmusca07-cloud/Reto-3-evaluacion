@@ -72,7 +72,7 @@ public class Metodos_del_main {
 			System.out.println("No esta ese id de factura");
 		}
 	}
-	
+
 	public static void eje4(Scanner sc, FacturaDAO fdao) {
 		System.out.println("Escribe un mes");
 		int mes = Integer.parseInt(sc.nextLine());

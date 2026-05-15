@@ -24,13 +24,12 @@ public class Factura {
 		this.total = total;
 	}
 
-	public Factura(LocalDate fecha, int id_cliente, int id_empleado, Double subtotal, double iva,
-			Double total) {
-		this(0,fecha,id_cliente,id_empleado,subtotal,iva,total);
+	public Factura(LocalDate fecha, int id_cliente, int id_empleado, Double subtotal, double iva, Double total) {
+		this(0, fecha, id_cliente, id_empleado, subtotal, iva, total);
 	}
 
 	public Factura() {
-		this(0,LocalDate.now(),0,0,0.0,0,0.0);
+		this(0, LocalDate.now(), 0, 0, 0.0, 0, 0.0);
 	}
 
 	public int getId() {
@@ -94,7 +93,5 @@ public class Factura {
 		return "Factura [id=" + id + ", fecha=" + fecha + ", id_cliente=" + id_cliente + ", id_empleado=" + id_empleado
 				+ ", subtotal=" + subtotal + ", iva=" + iva + ", total=" + total + "]";
 	}
-	
-	
 
 }
