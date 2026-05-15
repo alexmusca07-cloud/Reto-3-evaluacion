@@ -11,6 +11,7 @@ import dao.ProductoDAO;
 import modelo.Cliente;
 import modelo.Empleado;
 import modelo.Factura;
+import modelo.LineaFactura;
 
 public class Main {
 
@@ -56,6 +57,13 @@ public class Main {
 				case 2:
 					Metodos_del_main.eje2(sc, fdao, cdao, edao);
 					break;
+					
+				case 3:
+					Metodos_del_main.eje3(sc, fdao, ldao);
+					break;
+				
+				case 4:
+					
 				default:
 					System.out.println("No es ni fin ni un número de los indicados");
 				}
@@ -65,7 +73,7 @@ public class Main {
 	}
 
 
+	}
 
 
-}
 
