@@ -81,7 +81,7 @@ public class ClienteDAO implements GenericDAO<Cliente>, Serializable {
 			try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("miagenda.dat"))) {
 				out.writeObject(clientes);
 
-				// Leer agenda
+				// Leer cliente
 				try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("clientes.dat"))) {
 					Cliente clienteLeida = (Cliente) in.readObject();
 					System.out.println(clienteLeida);
