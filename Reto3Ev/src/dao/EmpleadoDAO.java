@@ -17,7 +17,7 @@ public class EmpleadoDAO implements GenericDAO<Empleado> {
 	@Override
 	public List<Empleado> obtenerTodos() {
 		List<Empleado> clientes = new ArrayList<>();
-		String sql = "SELECT p.id, p.dni, p.nombre, e.puesto, e.salario FROM persona join empleado on p.id=e.id";
+		String sql = "SELECT p.id, p.dni, p.nombre, e.puesto, e.salario FROM persona p join empleado e on p.id=e.id";
 
 		try (Connection conn = ConexionBD.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
