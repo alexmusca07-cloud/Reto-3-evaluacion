@@ -78,7 +78,7 @@ public class ClienteDAO implements GenericDAO<Cliente>, Serializable {
 				clientes.add(mapearFila(rs));
 			}
 			// Guardar clientes
-			try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("miagenda.dat"))) {
+			try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("clientes.dat"))) {
 				out.writeObject(clientes);
 
 				// Leer cliente
