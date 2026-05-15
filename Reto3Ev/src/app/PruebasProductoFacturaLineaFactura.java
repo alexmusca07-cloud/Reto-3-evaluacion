@@ -10,6 +10,7 @@ import dao.FacturaDAO;
 import dao.LineaFacturaDAO;
 import dao.ProductoDAO;
 import modelo.Cliente;
+import modelo.ClienteFichero;
 import modelo.Empleado;
 import modelo.Factura;
 import modelo.Producto;
@@ -44,6 +45,7 @@ public class PruebasProductoFacturaLineaFactura {
 				for (Factura f : fdao.obtenerPorIdEmpleado(edao.obtenerPorId(1).getId())) {
 					System.out.println(f);
 				}
+				
 	}
 
 }
