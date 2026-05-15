@@ -8,12 +8,12 @@ public class Factura {
 	protected LocalDate fecha;
 	protected int id_cliente;
 	protected int id_empleado;
-	protected Double subtotal;
+	protected double subtotal;
 	protected double iva;
-	protected Double total;
+	protected double total;
 
-	public Factura(int id, LocalDate fecha, int id_cliente, int id_empleado, Double subtotal, double iva,
-			Double total) {
+	public Factura(int id, LocalDate fecha, int id_cliente, int id_empleado, double subtotal, double iva,
+			double total) {
 		super();
 		this.id = id;
 		this.fecha = fecha;
@@ -24,12 +24,12 @@ public class Factura {
 		this.total = total;
 	}
 
-	public Factura(LocalDate fecha, int id_cliente, int id_empleado, Double subtotal, double iva, Double total) {
+	public Factura(LocalDate fecha, int id_cliente, int id_empleado, double subtotal, double iva, double total) {
 		this(0, fecha, id_cliente, id_empleado, subtotal, iva, total);
 	}
 
 	public Factura() {
-		this(0, LocalDate.now(), 0, 0, 0.0, 0, 0.0);
+		this(0, LocalDate.now(), 0, 0, 0.0, 0.0, 0.0);
 	}
 
 	public int getId() {
@@ -64,11 +64,11 @@ public class Factura {
 		this.id_empleado = id_empleado;
 	}
 
-	public Double getSubtotal() {
+	public double getSubtotal() {
 		return subtotal;
 	}
 
-	public void setSubtotal(Double subtotal) {
+	public void setSubtotal(double subtotal) {
 		this.subtotal = subtotal;
 	}
 
@@ -80,11 +80,11 @@ public class Factura {
 		this.iva = iva;
 	}
 
-	public Double getTotal() {
+	public double getTotal() {
 		return total;
 	}
 
-	public void setTotal(Double total) {
+	public void setTotal(double total) {
 		this.total = total;
 	}
 

@@ -15,7 +15,25 @@ public class FacturaDAO implements GenericDAO<Factura> {
 
 	@Override
 	public boolean insertar(Factura objeto) {
-		// TODO Auto-generated method stub
+		String sql = """
+				insert factura (fecha,id_cliente,id_empleado,subtotal,iva,total)
+				values(?,?,?,?,?,?)
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setObject(1, objeto.getFecha());
+			ps.setInt(2, objeto.getId_cliente());
+			ps.setInt(3, objeto.getId_empleado());
+			ps.setDouble(4, objeto.getSubtotal());
+			ps.setDouble(5, objeto.getIva());
+			ps.setDouble(6, objeto.getTotal());
+			int num = ps.executeUpdate();
+			if(num > 0) {
+				return true;
+			} 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 		return false;
 	}
 
@@ -140,6 +158,5 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		f.setIva(rs.getDouble("iva"));
 		f.setTotal(rs.getDouble("total"));
 		return f;
-
 	}
 }

@@ -1,15 +1,18 @@
 package app;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 import dao.ClienteDAO;
 import dao.EmpleadoDAO;
 import dao.FacturaDAO;
 import dao.LineaFacturaDAO;
+import dao.ProductoDAO;
 import modelo.Cliente;
 import modelo.Empleado;
 import modelo.Factura;
 import modelo.LineaFactura;
+import modelo.Producto;
 
 public class Metodos_del_main {
 
@@ -79,5 +82,42 @@ public class Metodos_del_main {
 		for (Factura f : fdao.obtenerPorMes(mes)) {
 			System.out.println(f);
 		}
+	}
+	
+	public static void eje5(Scanner sc, FacturaDAO fdao) {
+		LocalDate fecha = LocalDate.now();
+		try {
+			System.out.println("Escribe un dia de mes");
+			int dia = Integer.parseInt(sc.nextLine());
+			System.out.println("Escribe un mes");
+			int mes = Integer.parseInt(sc.nextLine());
+			System.out.println("Escribe un año");
+			int ano = Integer.parseInt(sc.nextLine());
+			fecha = LocalDate.of(ano, mes, dia);
+			for (Factura f : fdao.obtenerPorFecha(fecha)) {
+				System.out.println(f);
+			}
+		} catch (Exception e) {
+			System.out.println("Error en la fecha");
+		}
+	}
+	
+	public static void eje7(Scanner sc, ProductoDAO pdao) {
+		System.out.println("Escribe el nombre del producto");
+		String nombre = sc.nextLine();
+		System.out.println("Escribe el precio del producto");
+		double precio = Double.parseDouble(sc.nextLine());
+		System.out.println("Escribe el stock del producto");
+		int stock = Integer.parseInt(sc.nextLine());
+		Producto p = new Producto(nombre,precio,stock);
+		System.out.println(pdao.insertar(p));
+	}
+	
+	public static void eje8(Scanner sc, ProductoDAO pdao) {
+		System.out.println("Escribe el id de un producto");
+		int id_producto = Integer.parseInt(sc.nextLine());
+		System.out.println("Escribe el proximo precio de ese producto");
+		double precio = Double.parseDouble(sc.nextLine());
+		pdao.actualizarPasandoIdYPrecio(id_producto, precio);
 	}
 }

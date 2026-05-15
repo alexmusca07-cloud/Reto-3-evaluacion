@@ -1,5 +1,6 @@
 package app;
 
+import java.time.LocalDate;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -12,6 +13,7 @@ import modelo.Cliente;
 import modelo.Empleado;
 import modelo.Factura;
 import modelo.LineaFactura;
+import modelo.Producto;
 
 public class Main {
 
@@ -44,38 +46,54 @@ public class Main {
 		do {
 			System.out.println("Escribe \n" + menu);
 			String opcion = sc.nextLine();
-			if(opcion.equalsIgnoreCase("fin")) {
+			if (opcion.equalsIgnoreCase("fin")) {
 				salida = false;
 			} else {
 				int num = Integer.parseInt(opcion);
 				switch (num) {
-				
-				case 1: 
+
+				case 1:
 					Metodos_del_main.eje1(sc, fdao, cdao);
 					break;
-				
+
 				case 2:
 					Metodos_del_main.eje2(sc, fdao, cdao, edao);
 					break;
-					
+
 				case 3:
 					Metodos_del_main.eje3(sc, fdao, ldao);
 					break;
-				
+
 				case 4:
 					Metodos_del_main.eje4(sc, fdao);
+					break;
+					
+				case 5:
+					Metodos_del_main.eje5(sc, fdao);
+					break;
+						
+				case 6:
+					break;
+					
+				case 7:
+					Metodos_del_main.eje7(sc, pdao);
+					break;
+				
+				case 8:
+					Metodos_del_main.eje8(sc, pdao);
 					break;
 				default:
 					System.out.println("No es ni fin ni un número de los indicados");
 				}
 			}
 		} while (salida != false);
-		
-	}
-
 
 	}
 
 
 
 
+
+
+
+}

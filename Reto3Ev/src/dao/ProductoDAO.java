@@ -3,8 +3,12 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import modelo.Factura;
 import modelo.Producto;
 import util.ConexionBD;
 
@@ -48,7 +52,21 @@ public class ProductoDAO implements GenericDAO<Producto> {
 
 	@Override
 	public List<Producto> obtenerTodos() {
-		// TODO Auto-generated method stub
+		List<Producto> lista = new ArrayList<Producto>();
+		String sql = """
+				select id,nombre,precio,stock from producto
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			try (ResultSet rs = ps.executeQuery()){
+				while (rs.next()) {
+					lista.add(mapeo(rs));
+				}
+			}
+			return lista;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 		return null;
 	}
 
@@ -77,10 +95,23 @@ public class ProductoDAO implements GenericDAO<Producto> {
 			ps.setDouble(1, precio);
 			ps.setInt(2, id);
 			int filas = ps.executeUpdate();
-			return filas > 0 ;
+			if(filas > 0) {
+				return true;
+			} else {
+				return false;
+			}
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return false;
+	}
+	
+	private Producto mapeo(ResultSet rs) throws SQLException{
+		Producto p = new Producto();
+		p.setId(rs.getInt("id"));
+		p.setNombre(rs.getString("nombre"));
+		p.setPrecio(rs.getDouble("precio"));
+		p.setStock(rs.getInt("stock"));
+		return p;
 	}
 }

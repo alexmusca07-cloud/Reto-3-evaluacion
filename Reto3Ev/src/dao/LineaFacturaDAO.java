@@ -14,7 +14,23 @@ public class LineaFacturaDAO implements GenericDAO<LineaFactura> {
 
 	@Override
 	public boolean insertar(LineaFactura objeto) {
-		// TODO Auto-generated method stub
+		String sql = """
+				insert lineafactura (id_factura,id_producto,cantidad,precio_unitario,importe)
+				values(?,?,?,?,?,?)
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setInt(1, objeto.getId_factura());
+			ps.setInt(3, objeto.getId_producto());
+			ps.setInt(4, objeto.getCantidad());
+			ps.setDouble(5, objeto.getPrecio_unitario());
+			ps.setDouble(6, objeto.getImporte());
+			int num = ps.executeUpdate();
+			if(num > 0) {
+				return true;
+			} 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return false;
 	}
 
