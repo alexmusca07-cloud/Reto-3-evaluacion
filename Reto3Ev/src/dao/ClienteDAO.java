@@ -26,16 +26,16 @@ public class ClienteDAO implements GenericDAO<Cliente>, Serializable {
 				try (ResultSet rs = pstmt.getGeneratedKeys()) {
 					if (rs.next()) {
 						cliente.setId(rs.getInt(1)); // asigna el ID
-						return true;
 					}
 				}
 			}
-			String sql2 = "INSERT INTO cliente (direccion) VALUES (?)";
+			String sql2 = "INSERT INTO cliente (id,direccion) VALUES (?,?)";
 
 			try (Connection conn2 = ConexionBD.getConnection();
 					PreparedStatement pstmt2 = conn2.prepareStatement(sql2, Statement.RETURN_GENERATED_KEYS)) {
 
-				pstmt2.setString(1, cliente.getDireccion());
+				pstmt2.setInt(1, cliente.getId());
+				pstmt2.setString(2, cliente.getDireccion());
 
 				filas = pstmt2.executeUpdate();
 

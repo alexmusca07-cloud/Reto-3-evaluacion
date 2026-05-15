@@ -83,7 +83,7 @@ public class Metodos_del_main {
 			System.out.println(f);
 		}
 	}
-	
+
 	public static void eje5(Scanner sc, FacturaDAO fdao) {
 		LocalDate fecha = LocalDate.now();
 		try {
@@ -101,7 +101,7 @@ public class Metodos_del_main {
 			System.out.println("Error en la fecha");
 		}
 	}
-	
+
 	public static void eje7(Scanner sc, ProductoDAO pdao) {
 		System.out.println("Escribe el nombre del producto");
 		String nombre = sc.nextLine();
@@ -109,10 +109,10 @@ public class Metodos_del_main {
 		double precio = Double.parseDouble(sc.nextLine());
 		System.out.println("Escribe el stock del producto");
 		int stock = Integer.parseInt(sc.nextLine());
-		Producto p = new Producto(nombre,precio,stock);
+		Producto p = new Producto(nombre, precio, stock);
 		System.out.println(pdao.insertar(p));
 	}
-	
+
 	public static void eje8(Scanner sc, ProductoDAO pdao) {
 		System.out.println("Escribe el id de un producto");
 		int id_producto = Integer.parseInt(sc.nextLine());
