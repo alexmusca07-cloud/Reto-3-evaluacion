@@ -93,10 +93,10 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		return null;
 	}
 	
-	public List<Factura> obtenerPormes(int mes){
+	public List<Factura> obtenerPorMes(int mes){
 		List<Factura> lista = new ArrayList<Factura>();
 		String sql = """
-				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura where month(
+				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura where month(fecha) = ?
 				""";
 		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
 			ps.setInt(1, mes);
@@ -111,6 +111,8 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		}
 		return null;
 	}
+	
+	
 	
 	private Factura mapeo(ResultSet rs) throws SQLException{
 		Factura f = new Factura();
