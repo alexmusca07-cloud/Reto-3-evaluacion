@@ -73,6 +73,7 @@ public class Main {
 					break;
 						
 				case 6:
+					System.out.println(cdao.insertar(new Cliente("12345678V", "Pepe Carrera", "Plaza Mozart")));;
 					break;
 					
 				case 7:
