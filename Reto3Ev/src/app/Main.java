@@ -82,6 +82,13 @@ public class Main {
 				case 8:
 					Metodos_del_main.eje8(sc, pdao);
 					break;
+					
+				case 9:
+					break;
+				
+				case 10:
+					Metodos_del_main.eje10(sc, fdao, pdao);
+					break;
 				default:
 					System.out.println("No es ni fin ni un número de los indicados");
 				}
@@ -89,6 +96,8 @@ public class Main {
 		} while (salida != false);
 
 	}
+
+
 
 
 

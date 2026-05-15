@@ -147,7 +147,28 @@ public class FacturaDAO implements GenericDAO<Factura> {
 			System.out.println(e.getMessage());
 		}
 		return null;
-	}	
+	}
+	
+	public List<Factura> obtenerPorIdProducto(int id){
+		List<Factura> lista = new ArrayList<Factura>();
+		String sql = """
+					select t1.id,t1.fecha,t1.id_cliente,t1.id_empleado,t1.subtotal,t1.iva,t1.total from factura t1 left join
+					lineafactura t2 on t1.id = t2.id_factura where id_producto = ?;
+					""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setInt(1, id);
+			try(ResultSet rs = ps.executeQuery()){
+				while(rs.next()) {
+					lista.add(mapeo(rs));
+				}
+			}
+			return lista;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
 	private Factura mapeo(ResultSet rs) throws SQLException{
 		Factura f = new Factura();
 		f.setId(rs.getInt("id"));

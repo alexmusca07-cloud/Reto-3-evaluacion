@@ -120,4 +120,18 @@ public class Metodos_del_main {
 		double precio = Double.parseDouble(sc.nextLine());
 		pdao.actualizarPasandoIdYPrecio(id_producto, precio);
 	}
+	
+	public static void eje10(Scanner sc, FacturaDAO fdao, ProductoDAO pdao) {
+		for (Producto p : pdao.obtenerTodos()) {
+			System.out.println(p);
+		}
+		System.out.println();
+		System.out.println("¿Qué id de producto quieres?");
+		int id_producto = Integer.parseInt(sc.nextLine());
+		for (Factura f : fdao.obtenerPorIdProducto(id_producto)) {
+			System.out.println(f);
+		}
+	}
 }
+
+
