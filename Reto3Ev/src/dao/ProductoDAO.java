@@ -33,6 +33,7 @@ public class ProductoDAO implements GenericDAO<Producto> {
 						ps2.setString(1, objeto.getNombre());
 						ps2.setDouble(2, objeto.getPrecio());
 						ps2.setInt(3, objeto.getStock());
+						ps2.executeUpdate();
 						return true;
 					} else {
 						salida = false;
@@ -59,7 +60,6 @@ public class ProductoDAO implements GenericDAO<Producto> {
 
 	@Override
 	public boolean actualizar(Producto objeto) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -69,4 +69,18 @@ public class ProductoDAO implements GenericDAO<Producto> {
 		return false;
 	}
 
+	public boolean actualizarPasandoIdYPrecio(int id,double precio) {
+		String sql = """
+				update producto set precio = ? where id = ?
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setDouble(1, precio);
+			ps.setInt(2, id);
+			int filas = ps.executeUpdate();
+			return filas > 0 ;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return false;
+	}
 }
