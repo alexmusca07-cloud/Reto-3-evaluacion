@@ -23,13 +23,18 @@ public class Main {
 		}
 		System.out.println();
 		System.out.println(cdao.obtenerPorId(1));
-		for (Factura f : fdao.obtenerPorIdCliente(1)) {
+		for (Factura f : fdao.obtenerPorIdCliente(cdao.obtenerPorId(1).getId())) {
 			System.out.println(f);
 		}
 		System.out.println();
 		//2
 		for (Empleado e : edao.obtenerTodos()) {
 			System.out.println(e);
+		}
+		System.out.println();
+		System.out.println(edao.obtenerPorId(1));
+		for (Factura f : fdao.obtenerPorIdEmpleado(edao.obtenerPorId(1).getId())) {
+			System.out.println(f);
 		}
 	}
 }

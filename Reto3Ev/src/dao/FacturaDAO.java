@@ -112,8 +112,24 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		return null;
 	}
 	
-	
-	
+	public List<Factura> obtenerPorFecha(LocalDate fecha){
+		List<Factura> lista = new ArrayList<Factura>();
+		String sql = """
+				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura where fecha = ?
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setObject(1, fecha);
+			try(ResultSet rs = ps.executeQuery()){
+				while(rs.next()) {
+					lista.add(mapeo(rs));
+				}
+			}
+			return lista;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}	
 	private Factura mapeo(ResultSet rs) throws SQLException{
 		Factura f = new Factura();
 		f.setId(rs.getInt("id"));

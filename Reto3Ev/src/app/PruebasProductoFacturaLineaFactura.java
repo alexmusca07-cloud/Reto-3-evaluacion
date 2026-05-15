@@ -1,5 +1,7 @@
 package app;
 
+import java.time.LocalDate;
+
 import dao.FacturaDAO;
 import dao.LineaFacturaDAO;
 import dao.ProductoDAO;
@@ -18,6 +20,10 @@ public class PruebasProductoFacturaLineaFactura {
 			suma = suma + f.getTotal();
 		}
 		System.out.println("total gastado: " + suma);
+		System.out.println();
+		for (Factura f : fdao.obtenerPorFecha(LocalDate.of(2026, 05, 5))) {
+			System.out.println(f);
+		}
 	}
 
 }
