@@ -39,7 +39,7 @@ public class ClienteDAO implements GenericDAO<Cliente> {
 	@Override
 	public List<Cliente> obtenerTodos() {
 		List<Cliente> clientes = new ArrayList<>();
-		String sql = "SELECT p.id, p.dni, p.nombre, c.id as idcliente, c.direccion  FROM persona p join cliente c on p.id SELECT p.id, p.dni, p.nombre, c.id as idcliente, c.direccion  FROM persona p join cliente c on p.id=c.id";
+		String sql = "SELECT p.id, p.dni, p.nombre, c.id as idcliente, c.direccion  FROM persona p join cliente c on p.id=c.id";
 
 		try (Connection conn = ConexionBD.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -58,7 +58,7 @@ public class ClienteDAO implements GenericDAO<Cliente> {
 
 	@Override
 	public Cliente obtenerPorId(int id) {
-		String sql = "SELECT id, direccion FROM cliente WHERE id = ?";
+		String sql = "\"SELECT p.id, p.dni, p.nombre, c.id as idcliente, c.direccion  FROM persona p join cliente c on p.id=c.id WHERE id = ?";
 
 		try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
