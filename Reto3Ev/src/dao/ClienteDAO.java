@@ -5,8 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.Cliente;
 import util.ConexionBD;
+import java.io.Serializable;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
-public class ClienteDAO implements GenericDAO<Cliente> {
+public class ClienteDAO implements GenericDAO<Cliente>, Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public boolean insertar(Cliente cliente) {
@@ -35,7 +41,7 @@ public class ClienteDAO implements GenericDAO<Cliente> {
 
 				pstmt2.setString(1, cliente.getDireccion());
 
-				 filas = pstmt2.executeUpdate();
+				filas = pstmt2.executeUpdate();
 
 				if (filas > 0) {
 					try (ResultSet rs = pstmt2.getGeneratedKeys()) {
@@ -45,18 +51,18 @@ public class ClienteDAO implements GenericDAO<Cliente> {
 						}
 					}
 				}
-			
-			return false;
 
+				return false;
+
+			} catch (SQLException e) {
+				System.err.println("Error SQL al insertar '" + cliente.getNombre() + "': " + e.getMessage());
+				return false;
+			}
 		} catch (SQLException e) {
 			System.err.println("Error SQL al insertar '" + cliente.getNombre() + "': " + e.getMessage());
 			return false;
 		}
-		} catch (SQLException e) {
-			System.err.println("Error SQL al insertar '" + cliente.getNombre() + "': " + e.getMessage());
-			return false;
-		}
-		
+
 	}
 
 	@Override
@@ -70,7 +76,20 @@ public class ClienteDAO implements GenericDAO<Cliente> {
 
 			while (rs.next()) {
 				clientes.add(mapearFila(rs));
+			}
+			// Guardar clientes
+			try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("miagenda.dat"))) {
+				out.writeObject(clientes);
 
+				// Leer agenda
+				try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("clientes.dat"))) {
+					Cliente clienteLeida = (Cliente) in.readObject();
+					System.out.println(clienteLeida);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 
 		} catch (SQLException e) {

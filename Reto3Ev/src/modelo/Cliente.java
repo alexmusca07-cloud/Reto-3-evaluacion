@@ -1,7 +1,6 @@
 package modelo;
 
-public class Cliente extends Persona {
-
+public class Cliente extends Persona{
 	protected int id;
 	protected String direccion;
 
