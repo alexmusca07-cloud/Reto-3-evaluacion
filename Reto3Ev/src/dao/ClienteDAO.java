@@ -123,5 +123,6 @@ public class ClienteDAO implements GenericDAO<Cliente>, Serializable {
 		return c;
 
 	}
+	
 
 }
