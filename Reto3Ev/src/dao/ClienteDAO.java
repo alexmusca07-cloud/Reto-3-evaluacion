@@ -77,20 +77,6 @@ public class ClienteDAO implements GenericDAO<Cliente>, Serializable {
 			while (rs.next()) {
 				clientes.add(mapearFila(rs));
 			}
-			// Guardar clientes
-			try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("clientes.dat"))) {
-				out.writeObject(clientes);
-
-				// Leer cliente
-				try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("clientes.dat"))) {
-					Cliente clienteLeida = (Cliente) in.readObject();
-					System.out.println(clienteLeida);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 
 		} catch (SQLException e) {
 			System.err.println("Error SQL al obtener todos los clientes: " + e.getMessage());
