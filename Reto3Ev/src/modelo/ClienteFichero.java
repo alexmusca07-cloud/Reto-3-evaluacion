@@ -10,7 +10,7 @@ import dao.ClienteDAO;
 public class ClienteFichero {
 
 	// Guardar clientes
-	public void guardarFichero(ClienteDAO cdao) {
+	public static void guardarFichero(ClienteDAO cdao) {
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("clientes.dat"))) {
 			out.writeObject(cdao.obtenerTodos());
 		} catch (Exception e) {
@@ -18,7 +18,7 @@ public class ClienteFichero {
 		}
 	}
 
-	public void leerFichero() {
+	public static void leerFichero() {
 		// Leer cliente
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("clientes.dat"))) {
 			Cliente clienteLeida = (Cliente) in.readObject();
