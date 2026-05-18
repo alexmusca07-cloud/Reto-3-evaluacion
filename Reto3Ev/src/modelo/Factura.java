@@ -12,6 +12,17 @@ public class Factura {
 	protected double iva;
 	protected double total;
 
+	/**
+	 * Este constructor contiene todos los datos de la factura
+	 * 
+	 * @param id          El id de la factura
+	 * @param fecha       La fecha de la factura
+	 * @param id_cliente  El id del cliente al que va destinado al factura
+	 * @param id_empleado El id del empleado que emite la factura
+	 * @param subtotal    El precio sin IVA de la factura
+	 * @param iva         El coste del IVA
+	 * @param total       El subtotal+IVA
+	 */
 	public Factura(int id, LocalDate fecha, int id_cliente, int id_empleado, double subtotal, double iva,
 			double total) {
 		super();
@@ -24,10 +35,23 @@ public class Factura {
 		this.total = total;
 	}
 
+	/**
+	 * Este constructor contiene todos los datos de la factura menos el id
+	 * 
+	 * @param fecha       La fecha de la factura
+	 * @param id_cliente  El id del cliente al que va destinado al factura
+	 * @param id_empleado El id del empleado que emite la factura
+	 * @param subtotal    El precio sin IVA de la factura
+	 * @param iva         El coste del IVA
+	 * @param total       El subtotal+IVA
+	 */
 	public Factura(LocalDate fecha, int id_cliente, int id_empleado, double subtotal, double iva, double total) {
 		this(0, fecha, id_cliente, id_empleado, subtotal, iva, total);
 	}
 
+	/**
+	 * Este constructor va vacio
+	 */
 	public Factura() {
 		this(0, LocalDate.now(), 0, 0, 0.0, 0.0, 0.0);
 	}

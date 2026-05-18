@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class ClienteDAO implements GenericDAO<Cliente>, Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
 	public boolean insertar(Cliente cliente) {
 		String sql = "INSERT INTO persona (dni, nombre) VALUES (?, ?)";
@@ -119,6 +119,5 @@ public class ClienteDAO implements GenericDAO<Cliente>, Serializable {
 		return c;
 
 	}
-	
 
 }

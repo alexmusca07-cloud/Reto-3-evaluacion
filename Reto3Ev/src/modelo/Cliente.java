@@ -23,7 +23,8 @@ public class Cliente extends Persona implements Serializable {
 	}
 
 	/**
-	 * Constructor con dni y nombre heredados de persona y con dirección de cliente, y sin ids
+	 * Constructor con dni y nombre heredados de persona y con dirección de cliente,
+	 * y sin ids
 	 * 
 	 * @param dni       Heredado de persona
 	 * @param nombre    Heredadp de persona
@@ -36,6 +37,7 @@ public class Cliente extends Persona implements Serializable {
 
 	/**
 	 * Este constructor esta vacio
+	 * 
 	 */
 	public Cliente() {
 		super();
