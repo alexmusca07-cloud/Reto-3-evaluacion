@@ -29,7 +29,7 @@ public class ClienteFichero {
 	 * guardarFichero.
 	 * 
 	 * @return Devolvera la lista si ha podido leer el fichero .dat si no ha podido
-	 *         leerlo devolvera false
+	 *         leerlo devolvera null
 	 */
 	public static List<Cliente> leerFichero() {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("clientes.dat"))) {
