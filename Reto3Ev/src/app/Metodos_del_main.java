@@ -3,16 +3,8 @@ package app;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import dao.ClienteDAO;
-import dao.EmpleadoDAO;
-import dao.FacturaDAO;
-import dao.LineaFacturaDAO;
-import dao.ProductoDAO;
-import modelo.Cliente;
-import modelo.Empleado;
-import modelo.Factura;
-import modelo.LineaFactura;
-import modelo.Producto;
+import dao.*;
+import modelo.*;
 
 public class Metodos_del_main {
 
