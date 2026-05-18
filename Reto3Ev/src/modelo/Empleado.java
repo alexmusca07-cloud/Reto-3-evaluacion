@@ -26,11 +26,13 @@ public class Empleado extends Persona implements Serializable {
 	}
 
 	/**
-	 * Constructor con dni y nombre heredados de persona y los campos propios de empleado sin ids
-	 * @param dni       Heredado de persona
-	 * @param nombre    Heredadp de persona
-	 * @param puesto	Campo de emlpeado
-	 * @param salario	Campo de empleado
+	 * Constructor con dni y nombre heredados de persona y los campos propios de
+	 * empleado sin ids
+	 * 
+	 * @param dni     Heredado de persona
+	 * @param nombre  Heredadp de persona
+	 * @param puesto  Campo de emlpeado
+	 * @param salario Campo de empleado
 	 */
 	public Empleado(String dni, String nombre, String puesto, double salario) {
 		super(dni, nombre);

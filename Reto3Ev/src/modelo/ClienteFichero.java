@@ -5,7 +5,6 @@ import java.io.*;
 
 public class ClienteFichero {
 
-
 	/**
 	 * Este metodo guarda la lista que le pases en este caso de clientes en un
 	 * fichero .dat
@@ -28,7 +27,9 @@ public class ClienteFichero {
 	/**
 	 * Este metodo lee ficheros .dat en este caso el que se crea al usar el metodo
 	 * guardarFichero.
-	 * @return Devolvera la lista si ha podido leer el fichero .dat si no ha podido leerlo devolvera false
+	 * 
+	 * @return Devolvera la lista si ha podido leer el fichero .dat si no ha podido
+	 *         leerlo devolvera false
 	 */
 	public static List<Cliente> leerFichero() {
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("clientes.dat"))) {
