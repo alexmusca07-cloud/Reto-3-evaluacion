@@ -9,6 +9,16 @@ public class LineaFactura {
 	protected Double precio_unitario;
 	protected Double importe;
 
+	/**
+	 * Este constructor contiene todos los parametros de LineaFactura
+	 * 
+	 * @param id              El id de la LineaFactura
+	 * @param id_factura      El id de la factura
+	 * @param id_producto     El id del producto
+	 * @param cantidad        La cantidad de productos
+	 * @param precio_unitario El precio unitario de cada producto
+	 * @param importe         El importe total
+	 */
 	public LineaFactura(int id, int id_factura, int id_producto, int cantidad, Double precio_unitario, Double importe) {
 		super();
 		this.id = id;
@@ -19,10 +29,22 @@ public class LineaFactura {
 		this.importe = importe;
 	}
 
+	/**
+	 * Este constructor contiene todos los campos de LineaFactura menos el id
+	 * 
+	 * @param id_factura      El id de la factura
+	 * @param id_producto     El id del producto
+	 * @param cantidad        La cantidad de productos
+	 * @param precio_unitario El precio unitario de cada producto
+	 * @param importe         El importe total
+	 */
 	public LineaFactura(int id_factura, int id_producto, int cantidad, Double precio_unitario, Double importe) {
 		this(0, id_factura, id_producto, cantidad, precio_unitario, importe);
 	}
 
+	/**
+	 * Este constructor va vacio
+	 */
 	public LineaFactura() {
 		this(0, 0, 0, 0, 0.0, 0.0);
 	}
