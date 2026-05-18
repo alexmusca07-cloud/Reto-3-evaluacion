@@ -13,6 +13,7 @@ import modelo.Cliente;
 import modelo.ClienteFichero;
 import modelo.Empleado;
 import modelo.Factura;
+import modelo.LineaFactura;
 import modelo.Producto;
 
 public class PruebasProductoFacturaLineaFactura {
@@ -24,27 +25,9 @@ public class PruebasProductoFacturaLineaFactura {
 		ProductoDAO pdao = new ProductoDAO();
 		ClienteDAO cdao = new ClienteDAO();
 		EmpleadoDAO edao = new EmpleadoDAO();
-		
-
-		//1
-				for (Cliente c : cdao.obtenerTodos()) {
-					System.out.println(c);
-				}
-				System.out.println();
-				System.out.println(cdao.obtenerPorId(1));
-				for (Factura f : fdao.obtenerPorIdCliente(cdao.obtenerPorId(1).getId())) {
-					System.out.println(f);
-				}
-				System.out.println();
-				//2
-				for (Empleado e : edao.obtenerTodos()) {
-					System.out.println(e);
-				}
-				System.out.println();
-				System.out.println(edao.obtenerPorId(1));
-				for (Factura f : fdao.obtenerPorIdEmpleado(edao.obtenerPorId(1).getId())) {
-					System.out.println(f);
-				}
+		for (LineaFactura l : ldao.obtenerPorIdFactura(4)) {
+			System.out.println(l);
+		}
 				
 	}
 

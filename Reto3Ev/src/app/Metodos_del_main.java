@@ -133,6 +133,11 @@ public class Metodos_del_main {
 		int id = Integer.parseInt(sc.nextLine());
 		System.out.println(pdao.eliminarProductoSiNoEstaEnLineaFactura(id));
 	}
+	
+	public static void eje12(ClienteDAO cdao) {
+		ClienteFichero.guardarFichero(cdao.obtenerTodos());
+		ClienteFichero.leerFichero();
+	}
 }
 
 

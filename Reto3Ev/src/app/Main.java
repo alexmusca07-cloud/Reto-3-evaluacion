@@ -1,6 +1,8 @@
 package app;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -97,15 +99,16 @@ public class Main {
 					break;
 					
 				case 12:
-					ClienteFichero.guardarFichero(cdao.obtenerTodos());
-					ClienteFichero.leerFichero();
+					Metodos_del_main.eje12(cdao);
 					break;
 					
 				case 13:
 					System.out.println("Escribe un idfactura");
 					int id = Integer.parseInt(sc.nextLine());
-					fdao.copiar(id, ldao);
-					System.out.println(fdao.obteneUltimoIngresado());
+					List<LineaFactura> lista = ldao.obtenerPorIdFactura(id);
+					fdao.copiar(id);
+					Factura f = fdao.obteneUltimoIngresado();
+					System.out.println(ldao.insertarPorIdFactura(lista, f));
 					break;
 				
 				case 14:
@@ -121,6 +124,8 @@ public class Main {
 		} while (salida != false);
 
 	}
+
+
 
 
 

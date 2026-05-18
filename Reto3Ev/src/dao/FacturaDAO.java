@@ -169,7 +169,7 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		return null;
 	}
 
-	public boolean copiar(int id,LineaFacturaDAO ldao) {
+	public boolean copiar(int id) {
 		Factura f = obtenerPorId(id);
 		String sql = """
 				insert factura (fecha,id_cliente,id_empleado,subtotal,iva,total)
@@ -185,11 +185,6 @@ public class FacturaDAO implements GenericDAO<Factura> {
 			ps.setDouble(6, f.getTotal());
 			int num = ps.executeUpdate();
 			if (num > 0) {
-				try(ResultSet rs = ps.getGeneratedKeys()){
-					if(rs.next()) {
-						ldao.insertarPorIdFactura(id, rs.getInt("id"));
-					}
-				}
 				return true;
 			}
 		} catch (Exception e) {
@@ -201,7 +196,7 @@ public class FacturaDAO implements GenericDAO<Factura> {
 	
 	public Factura obteneUltimoIngresado() {
 		String sql = """
-				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura order by fecha desc limit 1
+				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura order by id desc limit 1
 				""";
 		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			try (ResultSet rs = ps.executeQuery()) {
