@@ -132,6 +132,15 @@ public class Metodos_del_main {
 			System.out.println(f);
 		}
 	}
+	
+	public static void eje11(Scanner sc, ProductoDAO pdao) {
+		for (Producto p : pdao.obtenerTodos()) {
+			System.out.println(p);
+		}
+		System.out.println("Escribe el id del producto que quieras eliminar");
+		int id = Integer.parseInt(sc.nextLine());
+		System.out.println(pdao.eliminarProductoSiNoEstaEnLineaFactura(id));
+	}
 }
 
 

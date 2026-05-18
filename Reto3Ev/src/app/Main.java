@@ -10,6 +10,7 @@ import dao.FacturaDAO;
 import dao.LineaFacturaDAO;
 import dao.ProductoDAO;
 import modelo.Cliente;
+import modelo.ClienteFichero;
 import modelo.Empleado;
 import modelo.Factura;
 import modelo.LineaFactura;
@@ -90,6 +91,29 @@ public class Main {
 				case 10:
 					Metodos_del_main.eje10(sc, fdao, pdao);
 					break;
+					
+				case 11:
+					Metodos_del_main.eje11(sc, pdao);
+					break;
+					
+				case 12:
+					ClienteFichero.guardarFichero(cdao.obtenerTodos());
+					ClienteFichero.leerFichero();
+					break;
+					
+				case 13:
+					System.out.println("Escribe un idfactura");
+					int id = Integer.parseInt(sc.nextLine());
+					fdao.copiar(id, ldao);
+					System.out.println(fdao.obteneUltimoIngresado());
+					break;
+				
+				case 14:
+					break;
+					
+				case 15:
+					break;
+					
 				default:
 					System.out.println("No es ni fin ni un número de los indicados");
 				}
@@ -97,6 +121,8 @@ public class Main {
 		} while (salida != false);
 
 	}
+
+
 
 
 

@@ -2,6 +2,7 @@ package app;
 
 import dao.ClienteDAO;
 import modelo.Cliente;
+import modelo.ClienteFichero;
 
 public class Pruebas2 {
 
@@ -12,9 +13,8 @@ public class Pruebas2 {
 		cdao.insertar(new Cliente("12345678V", "Pepe Carrera", "Plaza Mozart"));
 		break;
 		*/
-	}
-	/*case 12:
-		ClienteFichero.guardarFichero(cdao);
+		ClienteFichero.guardarFichero(cdao.obtenerTodos());
 		ClienteFichero.leerFichero();
-		break;*/
+	}
+
 }

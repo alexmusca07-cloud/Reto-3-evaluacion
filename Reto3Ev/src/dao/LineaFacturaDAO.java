@@ -77,6 +77,24 @@ public class LineaFacturaDAO implements GenericDAO<LineaFactura> {
 		return null;
 	}
 	
+	public boolean insertarPorIdFactura(int id_factura_original, int id_factura_nueva) {
+		String sql = """
+				insert lineafactura (id_factura,id_producto,cantidad,precio_unitario,importe)
+				select ?,id_producto,cantidad,precio_unitario,importe from lineafactura where id_factura = ?
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setInt(1, id_factura_nueva);
+			ps.setInt(2, id_factura_original);
+			int num = ps.executeUpdate();
+			if(num > 0) {
+				return true;
+			} 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+	
 	private LineaFactura mapeo(ResultSet rs) throws SQLException{
 		LineaFactura f = new LineaFactura();
 		f.setId(rs.getInt("id"));

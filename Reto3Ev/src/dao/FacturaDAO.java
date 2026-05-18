@@ -19,7 +19,7 @@ public class FacturaDAO implements GenericDAO<Factura> {
 				insert factura (fecha,id_cliente,id_empleado,subtotal,iva,total)
 				values(?,?,?,?,?,?)
 				""";
-		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setObject(1, objeto.getFecha());
 			ps.setInt(2, objeto.getId_cliente());
 			ps.setInt(3, objeto.getId_empleado());
@@ -27,9 +27,9 @@ public class FacturaDAO implements GenericDAO<Factura> {
 			ps.setDouble(5, objeto.getIva());
 			ps.setDouble(6, objeto.getTotal());
 			int num = ps.executeUpdate();
-			if(num > 0) {
+			if (num > 0) {
 				return true;
-			} 
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -48,9 +48,9 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		String sql = """
 				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura where id = ?
 				""";
-		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, id);
-			try(ResultSet rs = ps.executeQuery()){
+			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next()) {
 					return mapeo(rs);
 				}
@@ -73,15 +73,15 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		return false;
 	}
 
-	public List<Factura> obtenerPorIdCliente(int id){
+	public List<Factura> obtenerPorIdCliente(int id) {
 		List<Factura> lista = new ArrayList<Factura>();
 		String sql = """
 				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura where id_cliente = ?
 				""";
-		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, id);
-			try(ResultSet rs = ps.executeQuery()){
-				while(rs.next()) {
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
 					lista.add(mapeo(rs));
 				}
 			}
@@ -91,16 +91,16 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		}
 		return null;
 	}
-	
-	public List<Factura> obtenerPorIdEmpleado(int id){
+
+	public List<Factura> obtenerPorIdEmpleado(int id) {
 		List<Factura> lista = new ArrayList<Factura>();
 		String sql = """
 				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura where id_empleado = ?
 				""";
-		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, id);
-			try(ResultSet rs = ps.executeQuery()){
-				while(rs.next()) {
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
 					lista.add(mapeo(rs));
 				}
 			}
@@ -110,16 +110,16 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		}
 		return null;
 	}
-	
-	public List<Factura> obtenerPorMes(int mes){
+
+	public List<Factura> obtenerPorMes(int mes) {
 		List<Factura> lista = new ArrayList<Factura>();
 		String sql = """
 				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura where month(fecha) = ?
 				""";
-		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, mes);
-			try(ResultSet rs = ps.executeQuery()){
-				while(rs.next()) {
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
 					lista.add(mapeo(rs));
 				}
 			}
@@ -129,16 +129,16 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		}
 		return null;
 	}
-	
-	public List<Factura> obtenerPorFecha(LocalDate fecha){
+
+	public List<Factura> obtenerPorFecha(LocalDate fecha) {
 		List<Factura> lista = new ArrayList<Factura>();
 		String sql = """
 				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura where fecha = ?
 				""";
-		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setObject(1, fecha);
-			try(ResultSet rs = ps.executeQuery()){
-				while(rs.next()) {
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
 					lista.add(mapeo(rs));
 				}
 			}
@@ -148,17 +148,17 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		}
 		return null;
 	}
-	
-	public List<Factura> obtenerPorIdProducto(int id){
+
+	public List<Factura> obtenerPorIdProducto(int id) {
 		List<Factura> lista = new ArrayList<Factura>();
 		String sql = """
-					select t1.id,t1.fecha,t1.id_cliente,t1.id_empleado,t1.subtotal,t1.iva,t1.total from factura t1 left join
-					lineafactura t2 on t1.id = t2.id_factura where id_producto = ?;
-					""";
-		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+				select t1.id,t1.fecha,t1.id_cliente,t1.id_empleado,t1.subtotal,t1.iva,t1.total from factura t1 left join
+				lineafactura t2 on t1.id = t2.id_factura where id_producto = ?;
+				""";
+		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 			ps.setInt(1, id);
-			try(ResultSet rs = ps.executeQuery()){
-				while(rs.next()) {
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
 					lista.add(mapeo(rs));
 				}
 			}
@@ -168,11 +168,59 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		}
 		return null;
 	}
+
+	public boolean copiar(int id,LineaFacturaDAO ldao) {
+		Factura f = obtenerPorId(id);
+		String sql = """
+				insert factura (fecha,id_cliente,id_empleado,subtotal,iva,total)
+				values(?,?,?,?,?,?)
+				""";
+		try (Connection con = ConexionBD.getConnection();
+				PreparedStatement ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+			ps.setObject(1, LocalDate.now());
+			ps.setInt(2, f.getId_cliente());
+			ps.setInt(3, f.getId_empleado());
+			ps.setDouble(4, f.getSubtotal());
+			ps.setDouble(5, f.getIva());
+			ps.setDouble(6, f.getTotal());
+			int num = ps.executeUpdate();
+			if (num > 0) {
+				try(ResultSet rs = ps.getGeneratedKeys()){
+					if(rs.next()) {
+						ldao.insertarPorIdFactura(id, rs.getInt("id"));
+					}
+				}
+				return true;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return false;
+	}
 	
-	private Factura mapeo(ResultSet rs) throws SQLException{
+	public Factura obteneUltimoIngresado() {
+		String sql = """
+				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura order by fecha desc limit 1
+				""";
+		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					return mapeo(rs);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
+	
+
+	private Factura mapeo(ResultSet rs) throws SQLException {
 		Factura f = new Factura();
 		f.setId(rs.getInt("id"));
-		f.setFecha(rs.getObject("fecha",LocalDate.class));
+		f.setFecha(rs.getObject("fecha", LocalDate.class));
 		f.setId_cliente(rs.getInt("id_cliente"));
 		f.setId_empleado(rs.getInt("id_empleado"));
 		f.setSubtotal(rs.getDouble("subtotal"));

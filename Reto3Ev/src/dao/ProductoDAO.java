@@ -106,6 +106,24 @@ public class ProductoDAO implements GenericDAO<Producto> {
 		return false;
 	}
 	
+	public boolean eliminarProductoSiNoEstaEnLineaFactura(int id) {
+		String sql = """
+				delete from producto left t1 join lineafactura t2 on t1.id = t2.id_producto where t1.id = ? and t2.idproducto is null
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setInt(1, id);
+			int filas = ps.executeUpdate();
+			if(filas > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return false;
+	}
+	
 	private Producto mapeo(ResultSet rs) throws SQLException{
 		Producto p = new Producto();
 		p.setId(rs.getInt("id"));
