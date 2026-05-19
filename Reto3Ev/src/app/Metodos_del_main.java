@@ -1,7 +1,9 @@
 package app;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import dao.*;
@@ -41,8 +43,8 @@ public class Metodos_del_main {
 		System.out.println("Escribe un id del empleado de los mostrados");
 		System.out.println();
 		int id_empleado = Integer.parseInt(sc.nextLine());
-		for (Cliente c : cdao.obtenerTodos()) {
-			if (c.getId() == id_empleado) {
+		for (Factura f : fdao.obtenerTodos()) {
+			if (f.getId_empleado() == id_empleado) {
 				contadorEmpleado++;
 			}
 		}
@@ -114,6 +116,52 @@ public class Metodos_del_main {
 		pdao.actualizarPasandoIdYPrecio(id_producto, precio);
 	}
 	
+	public static void eje9(Scanner sc, FacturaDAO fdao, LineaFacturaDAO ldao, ProductoDAO pdao, ClienteDAO cdao,
+			EmpleadoDAO edao) {
+		HashMap<Integer, Integer> mapa = new HashMap<Integer, Integer>();
+		boolean salir = true;
+		System.out.println("Elige un cliente entre:");
+		for (Cliente c : cdao.obtenerTodos()) {
+			System.out.println(c);
+		}
+		int id_cliente = Integer.parseInt(sc.nextLine());
+		System.out.println("Elige un empleado entre:");
+		for (Empleado e : edao.obtenerTodos()) {
+			System.out.println(e);
+		}
+		int id_empleado = Integer.parseInt(sc.nextLine());
+		if(cdao.obtenerPorId(id_cliente) != null && edao.obtenerPorId(id_empleado) != null) {
+			do {
+				for (Producto p : pdao.obtenerTodos()) {
+					System.out.println(p);
+				}
+				System.out.println("Elige un producto o 0 para salir");
+				int id_producto = Integer.parseInt(sc.nextLine());
+				if (id_producto == 0) {
+					salir = false;
+				} else if(pdao.obtenerPorId(id_producto) != null) {
+					mapa.put(id_producto, mapa.getOrDefault(id_producto, 1) + 1);
+					pdao.ActualizarStock(pdao.obtenerPorId(id_producto));
+				}
+			} while (salir != false);
+			fdao.insertar(new Factura(LocalDate.now(),id_cliente,id_empleado,0,0,0));
+			Factura f = fdao.obtenerUltimoIngresado();
+			for (Map.Entry<Integer, Integer> entry : mapa.entrySet()) {
+				Integer key = entry.getKey();
+				Integer val = entry.getValue();	
+				Producto p = pdao.obtenerPorId(key);
+				ldao.insertar(new LineaFactura(f.getId(),key,val,p.getPrecio(),val * p.getPrecio()));
+			}
+			fdao.actualizarPrecio(f.getId());
+			System.out.println(fdao.obtenerPorId(f.getId()));
+			for (LineaFactura l : ldao.obtenerPorIdFactura(f.getId())) {
+				System.out.println(l);
+			}
+		} else {
+			System.out.println("Cliente o empleado no existe");
+		}
+	}
+	
 	public static void eje10(Scanner sc, FacturaDAO fdao, ProductoDAO pdao) {
 		for (Producto p : pdao.obtenerTodos()) {
 			System.out.println(p);
@@ -158,13 +206,30 @@ public class Metodos_del_main {
 			for (LineaFactura l : ldao.obtenerPorIdFactura(id)) {
 				System.out.println(l);
 			}
-			System.out.println("Elige una línea factura que actualizar");
+			System.out.println("Elige una línea factura que borrar");
 			int id_linea = Integer.parseInt(sc.nextLine());
 			if(ldao.eliminar(id_linea) != false) {
 				System.out.println(fdao.actualizarPrecio(id));
+				System.out.println(fdao.obtenerPorId(id));
 			}
 		} else {
 			System.out.println("No existe esa factura");
+		}
+	}
+	
+	public static void eje15(Scanner sc, FacturaDAO fdao, EmpleadoDAO edao) {
+		int contador = 0;
+		double sum = 0;
+		System.out.println("Elige un mes");
+		int mes = Integer.parseInt(sc.nextLine());
+		for (Empleado e : edao.obtenerTodos()) {
+			for (Factura f : fdao.obtenerPorMesEIdEmpleado(mes, e.getId())) {
+				sum += f.getTotal();
+				contador++;
+			}
+			System.out.println("Empleado de id " + e.getId() + " ha hecho " + contador + " facturas y ha facturado " + sum + "€");
+			contador=0;
+			sum=0;
 		}
 	}
 }

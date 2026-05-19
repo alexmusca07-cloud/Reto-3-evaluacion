@@ -82,7 +82,7 @@ public class ClienteDAO implements GenericDAO<Cliente>, Serializable {
 
 	@Override
 	public Cliente obtenerPorId(int id) {
-		String sql = "SELECT p.id, p.dni, p.nombre, c.id as idcliente, c.direccion  FROM persona p join cliente c on p.id=c.id WHERE id = ?";
+		String sql = "SELECT p.id, p.dni, p.nombre, c.id as idcliente, c.direccion  FROM persona p join cliente c on p.id=c.id WHERE c.id = ?";
 
 		try (Connection conn = ConexionBD.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 

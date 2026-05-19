@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Factura;
+import modelo.Producto;
 import util.ConexionBD;
 
 public class FacturaDAO implements GenericDAO<Factura> {
@@ -39,7 +40,21 @@ public class FacturaDAO implements GenericDAO<Factura> {
 
 	@Override
 	public List<Factura> obtenerTodos() {
-		// TODO Auto-generated method stub
+		List<Factura> lista = new ArrayList<Factura>();
+		String sql = """
+				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			try (ResultSet rs = ps.executeQuery()){
+				while (rs.next()) {
+					lista.add(mapeo(rs));
+				}
+			}
+			return lista;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 		return null;
 	}
 
@@ -212,8 +227,8 @@ public class FacturaDAO implements GenericDAO<Factura> {
 	
 	public boolean actualizarPrecio(int id) {
 		String sql = """
-				update Factura set subtotal=(select sum(importe) from lineafactura where id_factura = ?), total = subtotal * iva
-				where id = ?
+				update Factura set subtotal=(select sum(importe) from lineafactura where id_factura = ?),
+				iva = subtotal * 0.21, total = subtotal + iva where id = ?
 				""";
 		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 

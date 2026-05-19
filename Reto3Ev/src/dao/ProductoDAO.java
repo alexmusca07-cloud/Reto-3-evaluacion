@@ -76,6 +76,7 @@ public class ProductoDAO implements GenericDAO<Producto> {
 				select id,nombre,precio,stock from producto where id = ?
 				""";
 		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setInt(1, id);
 			try (ResultSet rs = ps.executeQuery()){
 				if (rs.next()) {
 					return mapeo(rs);
@@ -124,6 +125,25 @@ public class ProductoDAO implements GenericDAO<Producto> {
 				""";
 		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
 			ps.setInt(1, id);
+			int filas = ps.executeUpdate();
+			if(filas > 0) {
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return false;
+	}
+	
+	public boolean ActualizarStock(Producto p) {
+		String sql = """
+				update producto set stock = stock - 1 where id = ?
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setDouble(1, p.getId());
+
 			int filas = ps.executeUpdate();
 			if(filas > 0) {
 				return true;

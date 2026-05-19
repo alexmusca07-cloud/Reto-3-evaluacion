@@ -17,14 +17,14 @@ public class LineaFacturaDAO implements GenericDAO<LineaFactura> {
 	public boolean insertar(LineaFactura objeto) {
 		String sql = """
 				insert lineafactura (id_factura,id_producto,cantidad,precio_unitario,importe)
-				values(?,?,?,?,?,?)
+				values(?,?,?,?,?)
 				""";
 		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
 			ps.setInt(1, objeto.getId_factura());
-			ps.setInt(3, objeto.getId_producto());
-			ps.setInt(4, objeto.getCantidad());
-			ps.setDouble(5, objeto.getPrecio_unitario());
-			ps.setDouble(6, objeto.getImporte());
+			ps.setInt(2, objeto.getId_producto());
+			ps.setInt(3, objeto.getCantidad());
+			ps.setDouble(4, objeto.getPrecio_unitario());
+			ps.setDouble(5, objeto.getImporte());
 			int num = ps.executeUpdate();
 			if(num > 0) {
 				return true;
@@ -113,7 +113,7 @@ public class LineaFacturaDAO implements GenericDAO<LineaFactura> {
 		}
 		return false;
 	}
-	
+		
 	private LineaFactura mapeo(ResultSet rs) throws SQLException{
 		LineaFactura f = new LineaFactura();
 		f.setId(rs.getInt("id"));

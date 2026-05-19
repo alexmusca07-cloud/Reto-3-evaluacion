@@ -2,8 +2,10 @@ package app;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Scanner;
 
 import dao.ClienteDAO;
@@ -89,24 +91,7 @@ public class Main {
 					break;
 
 				case 9:
-					boolean salir = true;
-					System.out.println("Elige un cliente entre:");
-					for (Cliente c : cdao.obtenerTodos()) {
-						System.out.println(c);
-					}
-					int id_cliente = Integer.parseInt(sc.nextLine());
-					System.out.println("Elige un empleado entre:");
-					for (Empleado e : edao.obtenerTodos()) {
-						System.out.println(e);
-					}
-					int id_empleado = Integer.parseInt(sc.nextLine());
-					if(cdao.obtenerPorId(id_cliente) != null && edao.obtenerPorId(id_empleado) != null) {
-						for (Producto p : pdao.obtenerTodos()) {
-							System.out.println(p);
-						}
-					} else {
-						System.out.println("Cliente o empleado no existe");
-					}
+					Metodos_del_main.eje9(sc, fdao, ldao, pdao, cdao, edao);
 					break;
 
 				case 10:
@@ -130,6 +115,7 @@ public class Main {
 					break;
 
 				case 15:
+					Metodos_del_main.eje15(sc, fdao, edao);
 					break;
 
 				default:
@@ -139,4 +125,8 @@ public class Main {
 		} while (salida != false);
 
 	}
+
+
+
+
 }

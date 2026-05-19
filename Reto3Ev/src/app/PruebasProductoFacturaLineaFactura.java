@@ -25,10 +25,9 @@ public class PruebasProductoFacturaLineaFactura {
 		ProductoDAO pdao = new ProductoDAO();
 		ClienteDAO cdao = new ClienteDAO();
 		EmpleadoDAO edao = new EmpleadoDAO();
-		for (LineaFactura l : ldao.obtenerPorIdFactura(4)) {
-			System.out.println(l);
-		}
-				
+		//System.out.println(cdao.obtenerPorId(1));
+		//System.out.println(edao.obtenerPorId(5));
+		System.out.println(pdao.obtenerPorId(1));	
 	}
 
 }
