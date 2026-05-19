@@ -55,7 +55,18 @@ public class LineaFacturaDAO implements GenericDAO<LineaFactura> {
 
 	@Override
 	public boolean eliminar(int id) {
-		// TODO Auto-generated method stub
+		String sql = """
+				delete from lineafactura where id = ?
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setInt(1, id);
+			int num = ps.executeUpdate();
+			if(num > 0) {
+				return true;
+			} 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return false;
 	}
 	

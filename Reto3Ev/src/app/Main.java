@@ -70,53 +70,68 @@ public class Main {
 				case 4:
 					Metodos_del_main.eje4(sc, fdao);
 					break;
-					
+
 				case 5:
 					Metodos_del_main.eje5(sc, fdao);
 					break;
-						
+
 				case 6:
-					System.out.println(cdao.insertar(new Cliente("12345678V", "Pepe Carrera", "Plaza Mozart")));;
+					System.out.println(cdao.insertar(new Cliente("12345678V", "Pepe Carrera", "Plaza Mozart")));
+					;
 					break;
-					
+
 				case 7:
 					Metodos_del_main.eje7(sc, pdao);
 					break;
-				
+
 				case 8:
 					Metodos_del_main.eje8(sc, pdao);
 					break;
-					
+
 				case 9:
+					boolean salir = true;
+					System.out.println("Elige un cliente entre:");
+					for (Cliente c : cdao.obtenerTodos()) {
+						System.out.println(c);
+					}
+					int id_cliente = Integer.parseInt(sc.nextLine());
+					System.out.println("Elige un empleado entre:");
+					for (Empleado e : edao.obtenerTodos()) {
+						System.out.println(e);
+					}
+					int id_empleado = Integer.parseInt(sc.nextLine());
+					if(cdao.obtenerPorId(id_cliente) != null && edao.obtenerPorId(id_empleado) != null) {
+						for (Producto p : pdao.obtenerTodos()) {
+							System.out.println(p);
+						}
+					} else {
+						System.out.println("Cliente o empleado no existe");
+					}
 					break;
-				
+
 				case 10:
 					Metodos_del_main.eje10(sc, fdao, pdao);
 					break;
-					
+
 				case 11:
 					Metodos_del_main.eje11(sc, pdao);
 					break;
-					
+
 				case 12:
 					Metodos_del_main.eje12(cdao);
 					break;
-					
+
 				case 13:
-					System.out.println("Escribe un idfactura");
-					int id = Integer.parseInt(sc.nextLine());
-					List<LineaFactura> lista = ldao.obtenerPorIdFactura(id);
-					fdao.copiar(id);
-					Factura f = fdao.obteneUltimoIngresado();
-					System.out.println(ldao.insertarPorIdFactura(lista, f));
+					Metodos_del_main.eje13(sc, fdao, ldao);
 					break;
-				
+
 				case 14:
+					Metodos_del_main.eje14(sc, fdao, ldao);
 					break;
-					
+
 				case 15:
 					break;
-					
+
 				default:
 					System.out.println("No es ni fin ni un número de los indicados");
 				}
@@ -124,17 +139,4 @@ public class Main {
 		} while (salida != false);
 
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

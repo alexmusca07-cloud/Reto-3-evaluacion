@@ -194,7 +194,7 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		return false;
 	}
 	
-	public Factura obteneUltimoIngresado() {
+	public Factura obtenerUltimoIngresado() {
 		String sql = """
 				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura order by id desc limit 1
 				""";
@@ -210,7 +210,45 @@ public class FacturaDAO implements GenericDAO<Factura> {
 		return null;
 	}
 	
+	public boolean actualizarPrecio(int id) {
+		String sql = """
+				update Factura set subtotal=(select sum(importe) from lineafactura where id_factura = ?), total = subtotal * iva
+				where id = ?
+				""";
+		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+
+			ps.setInt(1, id);
+			ps.setInt(2, id);
+			int num = ps.executeUpdate();
+			if (num > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return false;
+	}
 	
+	public List<Factura> obtenerPorMesEIdEmpleado(int mes, int id) {
+		List<Factura> lista = new ArrayList<Factura>();
+		String sql = """
+				select id,fecha,id_cliente,id_empleado,subtotal,iva,total from factura where month(fecha) = ? and id_empleado = ?
+				""";
+		try (Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+			ps.setInt(1, mes);
+			ps.setInt(2, id);
+			try (ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					lista.add(mapeo(rs));
+				}
+			}
+			return lista;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
 
 	private Factura mapeo(ResultSet rs) throws SQLException {
 		Factura f = new Factura();

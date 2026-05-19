@@ -72,7 +72,19 @@ public class ProductoDAO implements GenericDAO<Producto> {
 
 	@Override
 	public Producto obtenerPorId(int id) {
-		// TODO Auto-generated method stub
+		String sql = """
+				select id,nombre,precio,stock from producto where id = ?
+				""";
+		try(Connection con = ConexionBD.getConnection(); PreparedStatement ps = con.prepareStatement(sql)){
+			try (ResultSet rs = ps.executeQuery()){
+				if (rs.next()) {
+					return mapeo(rs);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 		return null;
 	}
 

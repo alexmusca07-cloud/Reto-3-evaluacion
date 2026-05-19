@@ -1,6 +1,7 @@
 package app;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 import dao.*;
@@ -137,6 +138,34 @@ public class Metodos_del_main {
 	public static void eje12(ClienteDAO cdao) {
 		ClienteFichero.guardarFichero(cdao.obtenerTodos());
 		ClienteFichero.leerFichero();
+	}
+	
+	public static void eje13(Scanner sc, FacturaDAO fdao, LineaFacturaDAO ldao) {
+		System.out.println("Escribe un idfactura");
+		int id = Integer.parseInt(sc.nextLine());
+		List<LineaFactura> lista = ldao.obtenerPorIdFactura(id);
+		fdao.copiar(id);
+		Factura f = fdao.obtenerUltimoIngresado();
+		System.out.println(ldao.insertarPorIdFactura(lista, f));
+	}
+	
+
+	public static void eje14(Scanner sc, FacturaDAO fdao, LineaFacturaDAO ldao) {
+		System.out.println("Elige una factura por id");
+		int id = Integer.parseInt(sc.nextLine());
+		if(fdao.obtenerPorId(id) != null) {
+			System.out.println(fdao.obtenerPorId(id));
+			for (LineaFactura l : ldao.obtenerPorIdFactura(id)) {
+				System.out.println(l);
+			}
+			System.out.println("Elige una línea factura que actualizar");
+			int id_linea = Integer.parseInt(sc.nextLine());
+			if(ldao.eliminar(id_linea) != false) {
+				System.out.println(fdao.actualizarPrecio(id));
+			}
+		} else {
+			System.out.println("No existe esa factura");
+		}
 	}
 }
 
